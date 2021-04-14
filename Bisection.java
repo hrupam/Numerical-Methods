@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package numericalMethods;
 
 /**
  *
@@ -21,14 +20,26 @@ public class Bisection {
 
     public static void main(String args[]) {
         int i = 0;
-        double a, b;
         double x0 = 0, x1;
+
         Scanner sc = new Scanner(System.in);
-        DecimalFormat df = new DecimalFormat("##.######");
+
         System.out.println("a= ");
-        a = sc.nextDouble();
+        double a = sc.nextDouble();
         System.out.println("b= ");
-        b = sc.nextDouble();
+        double b = sc.nextDouble();
+        System.out.println("Enter no. of decimal places: ");
+        int decimalPlaces = sc.nextInt();
+
+        double error = (Math.pow(10, -(decimalPlaces + 1)));
+
+        String format = "##.";
+        for (int j = 1; j <= decimalPlaces; j++) {
+            format += "#";
+        }
+
+        DecimalFormat df = new DecimalFormat(format);
+
         int spaces = 15;
         System.out.print("Iteration");
         for (int j = 1; j <= spaces - 9; j++) {
@@ -50,8 +61,7 @@ public class Bisection {
 
             if (i > 0) {
                 /*Terminating Condition*/
-                if (Math.abs(x0 - x1) <= 0.0001) //upto 4 decimal
-                {
+                if (Math.abs(x0 - x1) <= error) {
                     break;
                 }
 

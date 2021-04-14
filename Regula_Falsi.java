@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package numericalMethods;
 
 /**
  *
@@ -21,14 +20,26 @@ public class Regula_Falsi {
 
     public static void main(String args[]) {
         int i = 0;
-        double a, b;
         double x0 = 0, x1;
+
         Scanner sc = new Scanner(System.in);
-        DecimalFormat df = new DecimalFormat("##.######");
-        System.out.print("a= ");
-        a = sc.nextDouble();
-        System.out.print("b= ");
-        b = sc.nextDouble();
+
+        System.out.println("a= ");
+        double a = sc.nextDouble();
+        System.out.println("b= ");
+        double b = sc.nextDouble();
+        System.out.println("Enter no. of decimal places: ");
+        int decimalPlaces = sc.nextInt();
+
+        double error = (Math.pow(10, -(decimalPlaces + 1)));
+
+        String format = "##.";
+        for (int j = 1; j <= decimalPlaces; j++) {
+            format += "#";
+        }
+
+        DecimalFormat df = new DecimalFormat(format);
+
         int spaces = 15;
         System.out.print("Iteration");
         for (int j = 1; j <= spaces - 9; j++) {
@@ -36,9 +47,7 @@ public class Regula_Falsi {
         }
         System.out.println("x0");
         while (true) {
-
             x1 = b - ((f(b) / (f(b) - f(a))) * (b - a));
-
             System.out.print(i);
             for (int j = 1; j <= spaces - (String.valueOf(i)).length(); j++) {
                 System.out.print(" ");
@@ -52,8 +61,7 @@ public class Regula_Falsi {
 
             if (i > 0) {
                 /*Terminating Condition*/
-                if (Math.abs(x0 - x1) <= 0.001) //3 decimal places
-                {
+                if (Math.abs(x0 - x1) <= error) {
                     break;
                 }
 
